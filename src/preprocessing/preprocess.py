@@ -1,3 +1,5 @@
+import pandas as pd
+
 EXPECTED_COLUMNS = [
     "timestamp",
     "pump_throughput_m3ph",
@@ -25,3 +27,15 @@ def check_missing_values(df):
 
 def check_duplicates(df):
     return df.duplicated().sum()
+
+def validate_timestamp_type(df):
+    if not pd.api.types.is_datetime64_any_dtype(df["timestamp"]):
+        raise TypeError("The 'timestamp' column must be of datetime type.")
+    return True
+
+def check_timestamp_ordering(df):
+    sorted_df = df.sort_values(["pump_number", "timestamp"])
+
+    return df[["pump_number", "timestamp"]].reset_index(drop=True).equals(
+        sorted_df[["pump_number", "timestamp"]].reset_index(drop=True)
+    )
