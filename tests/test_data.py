@@ -1,5 +1,5 @@
-from src.data.load_data import load_data
-from src.preprocessing.preprocess import (
+from predictive_maintenance.data.load_data import load_data
+from predictive_maintenance.preprocessing.preprocess import (
     validate_schema,
     check_missing_values,
     check_duplicates,
