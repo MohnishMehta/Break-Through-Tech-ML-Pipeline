@@ -19,3 +19,9 @@ def validate_schema(df):
             f"Missing columns in the DataFrame: {missing_columns}"
         )
     return True
+
+def check_missing_values(df):
+    return df.isnull().sum()
+
+def check_duplicates(df):
+    return df.duplicated().sum()
